@@ -1,4 +1,4 @@
-FROM php7-apache
+FROM php:7.1-apache
 MAINTAINER Cory Collier <corycollier@corycollier.com>
 
 # Do all of the global system package installations
@@ -9,14 +9,17 @@ RUN apt -y update \
         libfreetype6-dev \
 		libjpeg62-turbo-dev \
 		libmcrypt-dev \
-		libpng12-dev \
+        libxslt-dev \
+		# libpng12-dev \
         git \
-        vim
+        vim \
+        cron
 
 # Add all of the php specific packages
 RUN docker-php-ext-install mysqli pdo pdo_mysql zip \
     && docker-php-ext-install -j$(nproc) iconv mcrypt \
 	&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install xsl \
 	&& docker-php-ext-install -j$(nproc) gd
 
 # Install composer
