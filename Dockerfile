@@ -28,6 +28,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php -r "unlink('composer-setup.php');" \
     && mv composer.phar /usr/local/bin/composer
 
+RUN pecl install xdebug
+
 RUN composer global init
 
 # Enable Apache mod_rewrite
@@ -35,7 +37,7 @@ RUN a2enmod rewrite
 RUN a2enmod headers
 
 # Server configuration overrides
-ADD config/httpd.conf /etc/apache2/es-available/000-default.conf
+ADD config/httpd.conf /etc/apache2/sites-available/000-default.conf
 ADD ./config/php.ini /usr/local/etc/php/conf.d/custom.ini
 
 # Local administration environment overrides
