@@ -10,10 +10,15 @@ RUN apt -y update \
 		libjpeg62-turbo-dev \
 		libmcrypt-dev \
         libxslt-dev \
+        libjpeg-dev \
 		# libpng12-dev \
         git \
         vim \
-        cron
+        cron \
+        sendmail-bin \
+        sendmail \
+        sendmail-cf \
+        m4
 
 # Add all of the php specific packages
 RUN docker-php-ext-install mysqli pdo pdo_mysql zip \
@@ -28,7 +33,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php -r "unlink('composer-setup.php');" \
     && mv composer.phar /usr/local/bin/composer
 
-RUN pecl install xdebug
+RUN pecl install xdebug uopz
 
 RUN composer global init
 
@@ -38,7 +43,8 @@ RUN a2enmod headers
 
 # Server configuration overrides
 ADD config/httpd.conf /etc/apache2/sites-available/000-default.conf
-ADD ./config/php.ini /usr/local/etc/php/conf.d/custom.ini
+ADD config/php.ini /usr/local/etc/php/conf.d/custom.ini
+ADD scripts/sendmail.sh /home/sendmail.sh
 
 # Local administration environment overrides
 ADD config/.vimrc /root/.vimrc
@@ -46,4 +52,11 @@ ADD config/.bashrc /root/.bashrc
 
 # Enable rewrite and headers
 RUN a2enmod rewrite headers
+
+# for webgrind output
+RUN cd /opt && git clone https://github.com/jokkedk/webgrind.git
+RUN cd /opt/webgrind && composer install
+RUN mkdir -p /var/www/html/public
+RUN cd /var/www/html/public && ln -s /opt/webgrind /var/www/html/public/webgrind
+
 WORKDIR /var/www/html

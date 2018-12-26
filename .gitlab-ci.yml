@@ -10,7 +10,7 @@ build:
   stage: build
   script:
     - docker login --username="$DOCKER_USER" --password="$DOCKER_PASS"
-    - docker build --rm -t corycollier/apache-php:$CI_COMMIT_TAG .
+    - docker build --rm -t corycollier/npm-php:10.x-7.1 .
     - docker push corycollier/apache-php:$CI_COMMIT_TAG
   only:
     - tags
