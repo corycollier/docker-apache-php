@@ -48,9 +48,6 @@ ADD scripts/sendmail.sh /home/sendmail.sh
 ADD config/.vimrc /root/.vimrc
 ADD config/.bashrc /root/.bashrc
 
-# Enable rewrite and headers
-RUN a2enmod rewrite headers
-
 # for webgrind output
 RUN cd /opt && git clone https://github.com/jokkedk/webgrind.git
 RUN cd /opt/webgrind && composer install
