@@ -33,8 +33,6 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php -r "unlink('composer-setup.php');" \
     && mv composer.phar /usr/local/bin/composer
 
-RUN pecl install xdebug uopz
-
 RUN composer global init
 
 # Enable Apache mod_rewrite
@@ -49,14 +47,5 @@ ADD scripts/sendmail.sh /home/sendmail.sh
 # Local administration environment overrides
 ADD config/.vimrc /root/.vimrc
 ADD config/.bashrc /root/.bashrc
-
-# Enable rewrite and headers
-RUN a2enmod rewrite headers
-
-# for webgrind output
-RUN cd /opt && git clone https://github.com/jokkedk/webgrind.git
-RUN cd /opt/webgrind && composer install
-RUN mkdir -p /var/www/html/public
-RUN cd /var/www/html/public && ln -s /opt/webgrind /var/www/html/public/webgrind
 
 WORKDIR /var/www/html
