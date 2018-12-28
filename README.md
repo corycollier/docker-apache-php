@@ -10,3 +10,49 @@ Adding the following:
 * vim
 * cron
 * webgrind
+
+```
+[PHP Modules]
+Core
+ctype
+curl
+date
+dom
+fileinfo
+filter
+ftp
+gd
+hash
+iconv
+json
+libxml
+mbstring
+mysqli
+mysqlnd
+openssl
+pcre
+PDO
+pdo_mysql
+pdo_sqlite
+Phar
+posix
+readline
+Reflection
+session
+SimpleXML
+sodium
+SPL
+sqlite3
+standard
+tokenizer
+xdebug
+xml
+xmlreader
+xmlwriter
+xsl
+zip
+zlib
+
+[Zend Modules]
+Xdebug
+```

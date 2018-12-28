@@ -37,7 +37,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 RUN composer global init
 
 # Install Pecl stuff
-# RUN pecl install xdebug mcrypt
+RUN pecl install xdebug-beta 
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
