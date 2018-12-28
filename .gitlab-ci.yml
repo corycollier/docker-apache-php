@@ -10,5 +10,5 @@ build:
   stage: build
   script:
     - docker login --username="$DOCKER_USER" --password="$DOCKER_PASS"
-    - docker build --rm -t corycollier/apache-php:$CI_BUILD_REF_SLUG .
-    - docker push corycollier/apache-php:$CI_BUILD_REF_SLUG
+    - docker build --rm -t corycollier/apache-php:$CI_BUILD_REF_NAME .
+    - docker push corycollier/apache-php:$CI_BUILD_REF_NAME
