@@ -55,6 +55,6 @@ ADD config/.bashrc /root/.bashrc
 RUN cd /opt && git clone https://github.com/jokkedk/webgrind.git
 RUN cd /opt/webgrind && composer install
 RUN mkdir -p /var/www/html/web
-RUN cd /var/www/html/web && ln -s /opt/webgrind /var/www/html/public/webgrind
+RUN cd /var/www/html/web && ln -s /opt/webgrind /var/www/html/web/webgrind
 
 WORKDIR /var/www/html
