@@ -37,7 +37,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 RUN composer global init
 
 # Install Pecl stuff
-RUN pecl install xdebug-beta 
+RUN pecl install xdebug-beta
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
@@ -55,7 +55,7 @@ ADD config/.bashrc /root/.bashrc
 # for webgrind output
 RUN cd /opt && git clone https://github.com/jokkedk/webgrind.git
 RUN cd /opt/webgrind && composer install
-RUN mkdir -p /var/www/html/public
-RUN cd /var/www/html/public && ln -s /opt/webgrind /var/www/html/public/webgrind
+RUN mkdir -p /var/www/html/web
+RUN cd /var/www/html/web && ln -s /opt/webgrind /var/www/html/web/webgrind
 
 WORKDIR /var/www/html
