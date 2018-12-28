@@ -1,7 +1,7 @@
 # docker-apache-php
 Generic Apache/PHP Web Host
 
-Based of the official image from php - [7.3-apache](https://github.com/docker-library/php/blob/a280ab8e8790052338ce59a1fee739df8f831f16/7.3/stretch/apache/Dockerfile)
+Based of the official image from php - [7.2-apache](https://github.com/docker-library/php/blob/a280ab8e8790052338ce59a1fee739df8f831f16/7.2/stretch/apache/Dockerfile)
 
 Adding the following:
 * composer
