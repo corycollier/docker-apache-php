@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.2-apache
 MAINTAINER Cory Collier <corycollier@corycollier.com>
 
 # Do all of the global system package installations
@@ -22,7 +22,7 @@ RUN apt -y update \
 
 # Add all of the php specific packages
 RUN docker-php-ext-install mysqli pdo pdo_mysql zip \
-    && docker-php-ext-install -j$(nproc) iconv mcrypt \
+    && docker-php-ext-install -j$(nproc) iconv \
 	&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install xsl \
 	&& docker-php-ext-install -j$(nproc) gd
@@ -34,6 +34,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && mv composer.phar /usr/local/bin/composer
 
 RUN composer global init
+
+# Install Pecl stuff
+RUN pecl install xdebug mcrypt
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
