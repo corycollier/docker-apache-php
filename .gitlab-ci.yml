@@ -6,21 +6,9 @@ services:
 stages:
   - build
 
-build:tags:
+build:
   stage: build
   script:
     - docker login --username="$DOCKER_USER" --password="$DOCKER_PASS"
-    - docker build --rm -t corycollier/apache-php:$CI_COMMIT_TAG .
-    - docker push corycollier/apache-php:$CI_COMMIT_TAG
-  only:
-    - tags
-
-build:latest:
-  stage: build
-  script:
-    - docker login --username="$DOCKER_USER" --password="$DOCKER_PASS"
-    - docker build --rm -t corycollier/apache-php .
-    - docker push corycollier/apache-php
-  only:
-    - master
-    - develop
+    - docker build --rm -t corycollier/apache-php:$CI_BUILD_REF_SLUG .
+    - docker push corycollier/apache-php:$CI_BUILD_REF_SLUG
