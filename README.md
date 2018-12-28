@@ -8,4 +8,6 @@ Adding the following:
 * sendmail
 * git
 * vim
-* cron 
+* cron
+* xdebug
+* webgrind
