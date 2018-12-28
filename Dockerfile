@@ -37,6 +37,7 @@ RUN a2enmod headers
 # Server configuration overrides
 ADD config/httpd.conf /etc/apache2/es-available/000-default.conf
 ADD ./config/php.ini /usr/local/etc/php/conf.d/custom.ini
+ADD scripts/sendmail.sh /home/sendmail.sh
 
 # Local administration environment overrides
 ADD config/.vimrc /root/.vimrc
