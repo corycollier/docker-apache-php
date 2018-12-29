@@ -2,7 +2,7 @@
 
 set -o errexit
 set -o nounset
-set -o pipefail
+# set -o pipefail
 # set -o xtrace
 
 # First, lets do some sanity checking
@@ -19,7 +19,7 @@ declare _check_modules=(
 )
 
 # Store the actual modules in a local variable
-_actual_modules=$(docker exec "${_name}" bash -c "apachetl -M 2>&1")
+_actual_modules=$(docker exec "${_name}" bash -c "apachectl -M 2>&1")
 
 # Iterate over our check modules to make sure they're in the container
 for _module in ${_check_modules[@]}; do
