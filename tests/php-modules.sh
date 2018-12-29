@@ -5,7 +5,8 @@ set -o nounset
 set -o pipefail
 # set -o xtrace
 
-declare _modules=(
+declare _actual_modules=
+declare _check_modules=(
   "Core"
   "ctype"
   "curl"
@@ -47,8 +48,12 @@ declare _modules=(
   "XDebug"
 )
 
-for _module in ${_modules[@]}; do
-  if [[ -n $(php -m | grep "${_module}") ]]; then
+# Store the actual modules in a local variable
+_actual_modules=$(docker exec "${_name}" bash -c "php -m")
+
+# Iterate over our check modules to make sure they're in the container
+for _module in ${_check_modules[@]}; do
+  if [[ -n $(echo "${_actual_modules}" | grep "${_module}") ]]; then
     echo "[PASS] - php has module [${_module}]"
   else
     echo "[ERROR] - module [${_module}] not found"
