@@ -5,6 +5,10 @@ services:
 
 stages:
   - build
+  - test
+
+variables:
+  _PHP_VERSION: "7.2"
 
 build:
   stage: build
@@ -12,3 +16,11 @@ build:
     - docker login --username="$DOCKER_USER" --password="$DOCKER_PASS"
     - docker build --rm -t corycollier/apache-php:$CI_BUILD_REF_NAME .
     - docker push corycollier/apache-php:$CI_BUILD_REF_NAME
+
+test:
+    stage: test
+    script:
+      - apk add --update wget bash
+      - docker run -itd --name $CI_BUILD_REF_NAME corycollier/apache-php:$CI_BUILD_REF_NAME
+      - bash ./tests/php-version.sh $CI_BUILD_REF_NAME $_PHP_VERSION
+      - bash ./tests/php-module.sh
