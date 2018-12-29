@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+# set -o xtrace
+
+# First, lets do some sanity checking
+if [[ $(echo "$@" | wc -w) -lt "1" ]]; then
+  echo "[ERROR] This script requires 1 args: [docker container name] "
+  exit 1
+fi
+
+declare _name="${1}"
+declare _result=
+
+_result=$(docker exec "${_name}" bash -c "which git | grep git")
+
+# If the actual version is our checked version, print a happy message
+if [[ -n "${_result}" ]]; then
+  echo "passed"
+
+# If not though, get mad
+else
+  echo "[ERROR] git not found"
+  exit 1
+fi
