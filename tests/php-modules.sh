@@ -44,6 +44,7 @@ declare _modules=(
   "xsl"
   "zip"
   "zlib"
+  "XDebug"
 )
 
 for _module in ${_modules[@]}; do
