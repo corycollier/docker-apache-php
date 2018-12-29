@@ -5,6 +5,13 @@ set -o nounset
 set -o pipefail
 # set -o xtrace
 
+# First, lets do some sanity checking
+if [[ $(echo "$@" | wc -w) -lt "1" ]]; then
+  echo "[ERROR] This script requires 1 args: [docker container name]"
+  exit 1
+fi
+
+declare _name="${1}"
 declare _actual_modules=
 declare _check_modules=(
   "Core"
@@ -45,7 +52,7 @@ declare _check_modules=(
   "xsl"
   "zip"
   "zlib"
-  "XDebug"
+  "Xdebug"
 )
 
 # Store the actual modules in a local variable

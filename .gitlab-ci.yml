@@ -23,4 +23,4 @@ test:
       - apk add --update wget bash
       - docker run -itd --name $CI_BUILD_REF_NAME corycollier/apache-php:$CI_BUILD_REF_NAME
       - bash ./tests/php-version.sh $CI_BUILD_REF_NAME $_PHP_VERSION
-      - bash ./tests/php-module.sh
+      - bash ./tests/php-module.sh $CI_BUILD_REF_NAME
