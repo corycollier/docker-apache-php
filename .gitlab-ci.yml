@@ -24,3 +24,4 @@ test:
       - docker run -itd --name $CI_BUILD_REF_NAME corycollier/apache-php:$CI_BUILD_REF_NAME
       - bash ./tests/php-version-test.sh $CI_BUILD_REF_NAME $_PHP_VERSION
       - bash ./tests/php-modules-test.sh $CI_BUILD_REF_NAME
+      - bash ./tests/php-composer-test.sh $CI_BUILD_REF_NAME
