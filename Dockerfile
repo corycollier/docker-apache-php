@@ -47,15 +47,20 @@ RUN a2enmod headers
 ADD config/httpd.conf /etc/apache2/sites-available/000-default.conf
 ADD config/php.ini /usr/local/etc/php/conf.d/custom.ini
 ADD scripts/sendmail.sh /home/sendmail.sh
+ADD scripts/setup.sh /home/setup.sh
 
 # Local administration environment overrides
 ADD config/.vimrc /root/.vimrc
 ADD config/.bashrc /root/.bashrc
 
+# Sanity
+RUN mkdir -p /var/www/html/web
+ADD resources/index.html /var/www/html/web/index.html
+
 # for webgrind output
 RUN cd /opt && git clone https://github.com/jokkedk/webgrind.git
 RUN cd /opt/webgrind && composer install
-RUN mkdir -p /var/www/html/web
 RUN cd /var/www/html/web && ln -s /opt/webgrind /var/www/html/web/webgrind
 
+RUN /home/setup.sh
 WORKDIR /var/www/html
