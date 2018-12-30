@@ -38,10 +38,13 @@ RUN a2enmod headers
 ADD config/httpd.conf /etc/apache2/es-available/000-default.conf
 ADD ./config/php.ini /usr/local/etc/php/conf.d/custom.ini
 ADD scripts/sendmail.sh /home/sendmail.sh
+ADD scripts/setup.sh /home/setup.sh
 
 # Local administration environment overrides
 ADD config/.vimrc /root/.vimrc
 ADD config/.bashrc /root/.bashrc
 
 # Set the workdir
+RUN mkdir -p /var/www/html/web
+RUN /home/setup.sh
 WORKDIR /var/www/html
