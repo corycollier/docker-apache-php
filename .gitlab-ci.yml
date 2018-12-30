@@ -8,7 +8,7 @@ stages:
   - test
 
 variables:
-  _PHP_VERSION: "7.3"
+  _PHP_VERSION: "7.2"
 
 build:
   stage: build
