@@ -46,5 +46,6 @@ ADD config/.bashrc /root/.bashrc
 
 # Set the workdir
 RUN mkdir -p /var/www/html/web
+ADD resources/index.html /var/www/html/web/index.html
 RUN /home/setup.sh
 WORKDIR /var/www/html
