@@ -60,5 +60,6 @@ RUN cd /var/www/html/web && ln -s /opt/webgrind /var/www/html/web/webgrind
 
 # Set the workdir
 RUN mkdir -p /var/www/html/web
+ADD resources/index.html /var/www/html/web/index.html
 RUN /home/setup.sh
 WORKDIR /var/www/html
