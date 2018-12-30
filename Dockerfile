@@ -58,5 +58,7 @@ RUN cd /opt/webgrind && composer install
 RUN mkdir -p /var/www/html/web
 RUN cd /var/www/html/web && ln -s /opt/webgrind /var/www/html/web/webgrind
 
-RUN mkdir -p /var/www/html/web
+# Set the workdir
+ADD resources/index.html /var/www/html/web/index.html
+RUN /home/setup.sh
 WORKDIR /var/www/html
