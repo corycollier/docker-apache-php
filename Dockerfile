@@ -40,12 +40,15 @@ RUN a2enmod rewrite
 RUN a2enmod headers
 
 # Server configuration overrides
-ADD config/httpd.conf /etc/apache2/sites-available/000-default.conf
-ADD config/php.ini /usr/local/etc/php/conf.d/custom.ini
+ADD config/httpd.conf /etc/apache2/es-available/000-default.conf
+ADD ./config/php.ini /usr/local/etc/php/conf.d/custom.ini
 ADD scripts/sendmail.sh /home/sendmail.sh
+ADD scripts/setup.sh /home/setup.sh
 
 # Local administration environment overrides
 ADD config/.vimrc /root/.vimrc
 ADD config/.bashrc /root/.bashrc
 
+# Enable rewrite and headers
+RUN mkdir -p /var/www/html/web
 WORKDIR /var/www/html
