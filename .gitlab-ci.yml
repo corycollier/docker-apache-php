@@ -8,7 +8,7 @@ stages:
   - test
 
 variables:
-  _PHP_VERSION: "7.2"
+  _PHP_VERSION: "7.3"
 
 build:
   stage: build
@@ -22,5 +22,10 @@ test:
     script:
       - apk add --update wget bash
       - docker run -itd --name $CI_BUILD_REF_NAME corycollier/apache-php:$CI_BUILD_REF_NAME
-      - bash ./tests/php-version.sh $CI_BUILD_REF_NAME $_PHP_VERSION
-      - bash ./tests/php-module.sh
+      - ls -alih tests/
+      - bash ./tests/apache-modules-test.sh $CI_BUILD_REF_NAME
+      - bash ./tests/apache-docroot-test.sh $CI_BUILD_REF_NAME
+      - bash ./tests/php-version-test.sh $CI_BUILD_REF_NAME $_PHP_VERSION
+      - bash ./tests/php-modules-test.sh $CI_BUILD_REF_NAME
+      - bash ./tests/php-composer-test.sh $CI_BUILD_REF_NAME
+      - bash ./tests/system-git-test.sh $CI_BUILD_REF_NAME
