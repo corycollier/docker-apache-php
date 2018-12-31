@@ -52,17 +52,16 @@ declare _check_modules=(
   "xsl"
   "zip"
   "zlib"
-  "Xdebug"
 )
 
 # Store the actual modules in a local variable
 _actual_modules=$(docker exec "${_name}" bash -c "php -m")
 
 # Iterate over our check modules to make sure they're in the container
-for _module in ${_check_modules[@]}; do
+for _module in "${_check_modules[@]}"; do
   if [[ -n $(echo "${_actual_modules}" | grep "${_module}") ]]; then
     echo "[PASS] - php has module [${_module}]"
   else
-    echo "[ERROR] - module [${_module}] not found"
+    echo "[FAIL] - module [${_module}] not found"
   fi
 done
