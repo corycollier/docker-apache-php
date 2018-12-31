@@ -8,7 +8,7 @@ stages:
   - test
 
 variables:
-  _PHP_VERSION: "7.1"
+  _PHP_VERSION: "7.3"
 
 build:
   stage: build
@@ -30,3 +30,4 @@ test:
       - bash ./tests/php-composer-test.sh $CI_BUILD_REF_NAME
       - bash ./tests/system-git-test.sh $CI_BUILD_REF_NAME
       - bash ./tests/system-sendmail-test.sh $CI_BUILD_REF_NAME
+      - bash ./tests/system-cron-test.sh $CI_BUILD_REF_NAME
