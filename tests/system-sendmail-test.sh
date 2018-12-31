@@ -12,16 +12,13 @@ if [[ $(echo "$@" | wc -w) -lt "1" ]]; then
 fi
 
 declare _name="${1}"
-declare _result=
 
-_result=$(docker exec "${_name}" bash -c "which composer | grep composer")
+# Try to use the container to send an email (to me :))
+docker exec "${_name}" bash -c "echo 'test me' | sendmail -v corycollier@corycollier.com"
 
-# If the actual version is our checked version, print a happy message
-if [[ -n "${_result}" ]]; then
-  echo "passed"
-
-# If not though, get mad
-else
-  echo "[FAIL] composer not found"
+if [[ "$?" -gt "0" ]]; then
+  echo "[FAIL] - failed to send mail"
   exit 1
+else
+  echo "[PASS] - mail sent"
 fi

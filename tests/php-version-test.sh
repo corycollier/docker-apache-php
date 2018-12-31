@@ -19,10 +19,10 @@ _actual_version=$(docker exec "${_name}" bash -c "php -v | sed -n 's/PHP \([0-9]
 
 # If the actual version is our checked version, print a happy message
 if [[ "${_actual_version}" = "${_check_version}" ]]; then
-  echo "passed"
+  echo "[PASS] - PHP Version [${_actual_modules}] matches [${_check_version}]"
 
 # If not though, get mad
 else
-  echo "[ERROR] given version [${_check_version}] not the actual version [${_actual_version}]"
+  echo "[FAIL] given version [${_check_version}] not the actual version [${_actual_version}]"
   exit 1
 fi

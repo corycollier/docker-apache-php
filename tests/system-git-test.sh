@@ -18,10 +18,10 @@ _result=$(docker exec "${_name}" bash -c "which git | grep git")
 
 # If the actual version is our checked version, print a happy message
 if [[ -n "${_result}" ]]; then
-  echo "passed"
+  echo "[PASS] - git found"
 
 # If not though, get mad
 else
-  echo "[ERROR] git not found"
+  echo "[FAIL] git not found"
   exit 1
 fi

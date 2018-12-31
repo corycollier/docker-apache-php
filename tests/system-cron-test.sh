@@ -14,14 +14,14 @@ fi
 declare _name="${1}"
 declare _result=
 
-_result=$(docker exec "${_name}" bash -c "which composer | grep composer")
+_result=$(docker exec "${_name}" bash -c "which cron | grep cron")
 
 # If the actual version is our checked version, print a happy message
 if [[ -n "${_result}" ]]; then
-  echo "passed"
+  echo "[PASS] - cron found"
 
 # If not though, get mad
 else
-  echo "[FAIL] composer not found"
+  echo "[FAIL] git not found"
   exit 1
 fi

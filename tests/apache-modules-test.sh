@@ -26,6 +26,6 @@ for _module in ${_check_modules[@]}; do
   if [[ -n $(echo "${_actual_modules}" | grep "${_module}") ]]; then
     echo "[PASS] - apache has module [${_module}]"
   else
-    echo "[ERROR] - module [${_module}] not found"
+    echo "[FAIL] - module [${_module}] not found"
   fi
 done
