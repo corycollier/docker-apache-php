@@ -18,10 +18,10 @@ _result=$(docker exec "${_name}" bash -c "which composer | grep composer")
 
 # If the actual version is our checked version, print a happy message
 if [[ -n "${_result}" ]]; then
-  echo "passed"
+  echo "[PASS] - Composer found"
 
 # If not though, get mad
 else
-  echo "[ERROR] composer not found"
+  echo "[FAIL] - composer not found"
   exit 1
 fi

@@ -52,6 +52,7 @@ declare _check_modules=(
   "xsl"
   "zip"
   "zlib"
+  "Xdebug"
 )
 
 # Store the actual modules in a local variable

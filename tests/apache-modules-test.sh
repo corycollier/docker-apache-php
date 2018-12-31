@@ -29,6 +29,3 @@ for _module in ${_check_modules[@]}; do
     echo "[ERROR] - module [${_module}] not found"
   fi
 done
-
-
- 

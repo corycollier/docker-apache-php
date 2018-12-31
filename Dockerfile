@@ -38,6 +38,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 
 RUN composer global init
 
+# Install Pecl stuff
+RUN pecl install xdebug mcrypt
+
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 RUN a2enmod headers
@@ -52,8 +55,14 @@ ADD scripts/setup.sh /home/setup.sh
 ADD config/.vimrc /root/.vimrc
 ADD config/.bashrc /root/.bashrc
 
-# Set up docroot
-RUN mkdir -p /var/www/html/public
-ADD resources/index.html /var/www/html/public/index.html
+# for webgrind output
+RUN cd /opt && git clone https://github.com/jokkedk/webgrind.git
+RUN cd /opt/webgrind && composer install
+RUN mkdir -p /var/www/html/web
+RUN cd /var/www/html/web && ln -s /opt/webgrind /var/www/html/web/webgrind
+
+# Set the workdir
+RUN mkdir -p /var/www/html/web
+ADD resources/index.html /var/www/html/web/index.html
 RUN /home/setup.sh
 WORKDIR /var/www/html
