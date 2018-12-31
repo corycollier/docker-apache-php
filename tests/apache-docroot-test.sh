@@ -18,7 +18,7 @@ declare _check=
 _check=$(docker exec "${_name}" bash -c "apachectl -S 2>&1" | grep -m1 "does not exist")
 
 if [[ -z "${_check}" ]]; then
-  echo "[PASSED] - document root exists"
+  echo "[PASS] - document root exists"
 else
   echo "${_check}"
   echo "[FAIL] - document root does not exist"
