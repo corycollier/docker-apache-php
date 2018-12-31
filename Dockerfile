@@ -12,7 +12,12 @@ RUN apt -y update \
 		libmcrypt-dev \
 		# libpng12-dev \
         git \
-        vim
+        vim \
+        cron \
+        sendmail-bin \
+        sendmail \
+        sendmail-cf \
+        m4
 
 # Add all of the php specific packages
 RUN docker-php-ext-install mysqli pdo pdo_mysql zip \
