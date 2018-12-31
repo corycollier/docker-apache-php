@@ -14,11 +14,11 @@ fi
 declare _name="${1}"
 declare _result=
 
-_result=$(docker exec "${_name}" bash -c "which git | grep git")
+_result=$(docker exec "${_name}" bash -c "which cron | grep cron")
 
 # If the actual version is our checked version, print a happy message
 if [[ -n "${_result}" ]]; then
-  echo "[PASS] - git found"
+  echo "[PASS] - cron found"
 
 # If not though, get mad
 else
